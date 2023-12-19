@@ -43,7 +43,7 @@ public class CasesDaoTest {
   @Test
   public void updateCaseDetailsTest() {
     Cases testCase = new Cases();
-    testCase.setCaseId(1);
+    testCase.setCaseId(2);
     testCase.setCaseDescription("Updated Case Description");
     testCase.setRelatedIncidents(IncidentController.incidentList.get(0));
 

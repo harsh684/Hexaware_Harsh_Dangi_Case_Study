@@ -1,23 +1,21 @@
 package com.hexaware.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
 import com.hexaware.dao.IncidentDao;
 import com.hexaware.entity.Incidents;
 import com.hexaware.entity.LawEnforcementAgencies;
 import com.hexaware.entity.Suspects;
 import com.hexaware.entity.Victims;
 import com.hexaware.exception.DuplicateDataException;
+import com.hexaware.exception.IncidentNumberNotFoundException;
 import com.hexaware.exception.InvalidDataException;
-import com.hexaware.exception.InvalidStatusException;
 import com.hexaware.exception.RecordNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Controller class for managing incidents, including adding, updating, and searching incidents.
@@ -28,11 +26,6 @@ public class IncidentController {
      * Represents an incident object.
      */
     private Incidents incident;
-
-    /**
-     * Represents a victim object.
-     */
-    private Victims victim;
 
     /**
      * Data access object for incidents.
@@ -431,9 +424,9 @@ public class IncidentController {
      * Retrieves and displays details of a specific incident based on the provided incident ID.
      *
      * @param id The ID of the incident to be retrieved and displayed.
-     * @throws RecordNotFoundException If the incident with the provided ID is not found.
+     * @throws IncidentNumberNotFoundException 
      */
-	public void getIncidentById(int id) throws RecordNotFoundException {
+	public void getIncidentById(int id) throws IncidentNumberNotFoundException {
 		boolean isAvailable=false;
 		for(Incidents i:incidentList) {
 			if(i.getIncidentId()==id) {
@@ -442,6 +435,6 @@ public class IncidentController {
 			}
 		}
 		if(isAvailable==false)
-			throw new RecordNotFoundException();
+			throw new IncidentNumberNotFoundException();
 	}
 }

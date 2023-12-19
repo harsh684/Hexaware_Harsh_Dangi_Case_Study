@@ -41,7 +41,7 @@ public class LawEnforcementAgencyController {
     /**
      * Instance of LawEnforcementAgencies for managing agency information.
      */
-    private LawEnforcementAgencies la;
+    private LawEnforcementAgencies agency;
 
     /**
      * Populates the agencyList by retrieving data from the database.
@@ -57,45 +57,45 @@ public class LawEnforcementAgencyController {
      */
 	public void addAgency() {
 		StringBuffer str=new StringBuffer("");
-		la=new LawEnforcementAgencies();
+		agency=new LawEnforcementAgencies();
 		try {
 			System.out.println("Enter Agency Id:");
 			str=str.append(bufferReader.readLine());
 			if(str.toString().equals("")||Integer.parseInt(str.toString())<0)
 				throw new InvalidDataException();
-			la.setAgencyId(Integer.parseInt(str.toString()));
+			agency.setAgencyId(Integer.parseInt(str.toString()));
 
 			System.out.println("Enter Agency Name:");
 			str.setLength(0);
 			str=str.append(bufferReader.readLine());
 			if(str.toString().equals(""))
 				throw new InvalidDataException();
-			la.setAgencyName(str.toString());
+			agency.setAgencyName(str.toString());
 			
 			System.out.println("Enter Agency Jurisdiction:");
 			str.setLength(0);
 			str=str.append(bufferReader.readLine());
 			if(str.toString().equals(""))
 				throw new InvalidDataException();
-			la.setJurisdiction(str.toString());
+			agency.setJurisdiction(str.toString());
 			
 			System.out.println("Enter Agencies contact Info:");
 			str.setLength(0);
 			str=str.append(bufferReader.readLine());
 			if(str.toString().equals(""))
 				throw new InvalidDataException();
-			la.setContactInfo(str.toString());
+			agency.setContactInfo(str.toString());
 			
 			boolean containsObject = agencyList.stream()
-	                .anyMatch(obj -> obj.getAgencyId()==la.getAgencyId());
+	                .anyMatch(obj -> obj.getAgencyId()==agency.getAgencyId());
 			
 			
 			if(containsObject) {
 				throw new DuplicateDataException();
 			}
 			
-			agencyList.add(la);
-			agencyDao.addAgency(la);
+			agencyList.add(agency);
+			agencyDao.addAgency(agency);
 			
 		}catch(IOException e) {
 			e.printStackTrace();
